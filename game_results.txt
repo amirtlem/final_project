@@ -1,6 +1,6 @@
 Target Score: 10
-Max re-rolls : 5
+Max re-rolls: 4
 
-Final Scores: 
-Player: [10]
-Winner: Player with 10 points!
+Final Scores:
+Player: 11
+Winner: Player with 11 points!

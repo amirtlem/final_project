@@ -143,46 +143,55 @@ else:
     player_names = [f"Player {i+1}" for i in range(player_count)]
     computer = False 
 
-# Initializes scores
-scores = [0] * player_count 
-# Initializes current_player variable 
-current_player = 0
+# Intializing player statistics using a dictionary 
+player_stats = {name: {"score" : 0, "turns" : 0} for name in player_names}
 
+# Intializes turn counter 
+turn_counter = 0 
 # Game loop 
-# While the max scores are less than the target score
-while max(scores) < target:
-    # Message that tells player's whose turn it is  
-    print(f"\n{player_names[current_player]}'s turn!")
-    # Score that the player earns each turn 
-    turn_score = play_turn(player_names[current_player], computer=(computer and current_player == 1))
-    scores[current_player] += turn_score
-    print(f"{player_names[current_player]}'s total score: {scores[current_player]}")
-    # Swtiches players 
-    current_player = (current_player + 1) % player_count
+# While the max scores are less than the target score 
+while max(player_stats[name]["score"] for name in player_names) < target:
+    current_turn_player = player_names[turn_counter % player_count]  # Select player based on turn counter
+    print(f"\n{current_turn_player}'s turn!")
+    
+    turn_score = play_turn(current_turn_player, computer=(computer and player_stats[current_turn_player]["turns"] % player_count == 1))
+    
+    # Update player statistics dictionary
+    player_stats[current_turn_player]["score"] += turn_score
+    player_stats[current_turn_player]["turns"] += 1
+    print(f"{current_turn_player}'s total score: {player_stats[current_turn_player]['score']}")
+    
+    # Increment turns and switch to the next player
+    turn_counter += 1 
 
-# How the winner is determined 
-winner = player_names[0] if scores[0] >= target else player_names[1]
-# Winner message 
-print(f"\n{winner} wins with a score of {max(scores)}!")
+# Determine the winner 
+max_score = -1
+winner = None
+for i in range(len(player_names)):
+    player_name = player_names[i]
+    player_score = player_stats[player_name]["score"]
+    if player_score > max_score:
+        max_score = player_score
+        winner = player_name
 
-# If there is a new high score let user know 
-if max(scores) > high_score: 
-    high_score = max(scores)
-    print(f"New high scoree is : {high_score}")
-# If user did not get a higher score than the "high score" let them know what the high score is
+
+print(f"\n{winner} wins with a score of {max_score}!")
+
+# Track and display high scores
+if max_score > high_score: 
+    high_score = max_score
+    print(f"New high score is: {high_score}")
 else: 
     print(f"Highscore to beat: {high_score}")
 
 # Write the results of the game to a file
-with open ("game_results.txt", "w") as file:
-    file.write (f"Target Score: {target}\n")
-    file.write (f"Max re-rolls : {max_re_rolls}\n")
-    file.write (f"\nFinal Scores: \n")
-    for name, score in zip(player_names, scores): 
-        file.write(f"{name}: {scores}\n")
-    max_score = max(scores)
+with open("game_results.txt", "w") as file:
+    file.write(f"Target Score: {target}\n")
+    file.write(f"Max re-rolls: {max_re_rolls}\n")
+    file.write(f"\nFinal Scores:\n")
+    for name, stats in player_stats.items():
+        file.write(f"{name}: {stats['score']}\n")
     file.write(f"Winner: {winner} with {max_score} points!\n")
-
 
 
 print("Game results written to game_results.txt")
