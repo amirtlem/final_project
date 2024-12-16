@@ -1,0 +1,6 @@
+Target Score: 10
+Max re-rolls : 5
+
+Final Scores: 
+Player: [10]
+Winner: Player with 10 points!
