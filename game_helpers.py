@@ -8,6 +8,8 @@ import pandas as pd
 import seaborn as sns
 # importing the matplotlib module 
 import matplotlib.pyplot as plt 
+# importing the time module 
+import time  
 
 def get_game_parameters():
     """
@@ -29,7 +31,7 @@ def get_game_parameters():
         if len(sys.argv) > 3:
             player_count = int(sys.argv[3])
         else:
-            player_count = int(input("Enter the number of players (1-4): ") or 2)
+            player_count = int(input("Enter the number of players (1-4) or default to 2: ") or 2)
 
         player_count = max(1, min(player_count, 4))
     except ValueError:
@@ -82,6 +84,10 @@ def get_player_choice(player_name):
 
 def play_turn(player_name, max_re_rolls, computer=False):
     """ Plays one turn for a player."""
+    # Records the start time 
+    start_time = time.time()
+
+
     dice = roll_dice()
     roll_history = [tuple(dice)]
     print(f"{player_name} rolls: {dice}")
@@ -114,6 +120,9 @@ def play_turn(player_name, max_re_rolls, computer=False):
             score = sum(dice)
             print(f"{player_name} scores {score} points this turn.")
             print(f"Roll history for this turn: {roll_history}")
+            # Ends the time 
+            end_time = time.time()
+            print(f"Turn Duration: {end_time-start_time:.2f} seconds")
             return score
 
         # If the player decides to re-roll
@@ -126,6 +135,9 @@ def play_turn(player_name, max_re_rolls, computer=False):
         # Check for tuple out after re-roll
         if tuple_out(dice):
             print(f"Tuple out! {player_name} scores 0 points this turn.")
+            # Ends the time 
+            end_time = time.time()
+            print(f"Turn Duration: {end_time-start_time:.2f} seconds")
             return 0
 
         # Recalculate fixed dice after each re-roll
@@ -135,6 +147,9 @@ def play_turn(player_name, max_re_rolls, computer=False):
             score = sum(dice)
             print(f"{player_name} scores {score} points this turn.")
             print(f"Roll history for this turn: {roll_history}")
+            # Ends the time 
+            end_time = time.time()
+            print(f"Turn Duration: {end_time-start_time:.2f} seconds")
             return score
 
 def visualize_stats(player_stats_df,player_stats):

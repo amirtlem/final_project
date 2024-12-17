@@ -6,7 +6,8 @@ from game_helpers import get_game_parameters, roll_dice, tuple_out, fixed_dice, 
 high_score = 0
 
 # Get game parameters from command line arguments or inputs 
-target, max_re_rolls, player_count = get_game_parameters() 
+target, max_re_rolls, player_count = get_game_parameters()
+ 
 # Defining the player names based on the number of players chosen at the beginning and whether or not they play with the computer 
 # If there is only 1 player, the computer plays with the user
 if player_count == 1:

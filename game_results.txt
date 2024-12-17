@@ -1,7 +1,6 @@
-Target Score: 50
+Target Score: 40
 Max re-rolls: 3
 
 Final Scores:
-Player 1: 58
-Player 2: 42
-Winner: Player 1 with 58 points!
+Player: 43
+Winner: Player with 43 points!
