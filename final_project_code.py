@@ -2,6 +2,8 @@
 import random
 # imports the sys module 
 import sys 
+# imports the pandas module
+import pandas as pd
 
 def get_game_parameters():
     """
@@ -145,9 +147,10 @@ else:
 
 # Intializing player statistics using a dictionary 
 player_stats = {name: {"score" : 0, "turns" : 0} for name in player_names}
+player_stats_df = pd.DataFrame.from_dict(player_stats) 
 
 # Intializes turn counter 
-turn_counter = 0 
+turn_counter = 0
 # Game loop 
 # While the max scores are less than the target score 
 while max(player_stats[name]["score"] for name in player_names) < target:
@@ -160,6 +163,12 @@ while max(player_stats[name]["score"] for name in player_names) < target:
     player_stats[current_turn_player]["score"] += turn_score
     player_stats[current_turn_player]["turns"] += 1
     print(f"{current_turn_player}'s total score: {player_stats[current_turn_player]['score']}")
+
+    # Sychronizing the data frame with the player_stats dictionary so that the accurate scores appear after each round 
+    player_stats_df = pd.DataFrame.from_dict(player_stats) 
+    # Printing player stats 
+    print("\nPlayer Stats: ")
+    print(player_stats_df)
     
     # Increment turns and switch to the next player
     turn_counter += 1 
