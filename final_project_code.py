@@ -1,4 +1,3 @@
-import sys
 import pandas as pd 
 from game_helpers import get_game_parameters, roll_dice, tuple_out, fixed_dice, re_roll_dice, get_player_choice, play_turn, visualize_stats
 
