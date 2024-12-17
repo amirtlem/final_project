@@ -74,7 +74,9 @@ def get_player_choice(player_name):
         # Makes sure that the user only uses "y" and "n" when asked if they want to continue
         #.strip() and .lower() make it so that white space and upper case doesn't matter
         choice = input(f"{player_name}, stop and keep score? (y/n): ").strip().lower()
-        if choice in {"y", "n"}:
+        if choice == "y":
+            return choice 
+        elif choice == "n":
             return choice 
         else: 
             # Error message if input is invalid 
