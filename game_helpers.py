@@ -80,7 +80,7 @@ def get_player_choice(player_name):
             # Error message if input is invalid 
             print("Invalid input. Please enter 'y' or 'n'.")
 
-def play_turn(player_name, computer=False):
+def play_turn(player_name, max_re_rolls, computer=False):
     """ Plays one turn for a player."""
     dice = roll_dice()
     roll_history = [tuple(dice)]
@@ -137,7 +137,7 @@ def play_turn(player_name, computer=False):
             print(f"Roll history for this turn: {roll_history}")
             return score
 
-def visualize_stats(player_stats_df):
+def visualize_stats(player_stats_df,player_stats):
     """ Visualizes the player statistics in bar plot form using seaborn and matplotlib module"""
 
     # Making player_stats into a list of dictionaries to make it easier to plot 
