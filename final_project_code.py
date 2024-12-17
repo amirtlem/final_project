@@ -30,7 +30,7 @@ while max(player_stats[name]["score"] for name in player_names) < target:
     current_turn_player = player_names[turn_counter % player_count]  # Select player based on turn counter
     print(f"\n{current_turn_player}'s turn!")
     
-    turn_score = play_turn(current_turn_player, computer=(computer and player_stats[current_turn_player]["turns"] % player_count == 1))
+    turn_score = play_turn(current_turn_player,max_re_rolls, computer=(computer and player_stats[current_turn_player]["turns"] % player_count == 1))
     
     # Update player statistics dictionary
     player_stats[current_turn_player]["score"] += turn_score
@@ -67,9 +67,9 @@ if max_score > high_score:
 else: 
     print(f"Highscore to beat: {high_score}")
 
-visualize_stats(player_stats_df)
+visualize_stats(player_stats_df,player_stats)
 
-# Write the results of the game to a file
+# Write the results of the game to a 50file
 with open("game_results.txt", "w") as file:
     file.write(f"Target Score: {target}\n")
     file.write(f"Max re-rolls: {max_re_rolls}\n")
