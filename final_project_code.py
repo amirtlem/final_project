@@ -67,9 +67,10 @@ if max_score > high_score:
 else: 
     print(f"Highscore to beat: {high_score}")
 
+# Calls the visualize stats function so that the bar graph is created. 
 visualize_stats(player_stats_df,player_stats)
 
-# Write the results of the game to a 50file
+# Write the results of the game to a txt file
 with open("game_results.txt", "w") as file:
     file.write(f"Target Score: {target}\n")
     file.write(f"Max re-rolls: {max_re_rolls}\n")
