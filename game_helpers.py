@@ -87,6 +87,10 @@ def play_turn(player_name, max_re_rolls, computer=False):
     # Records the start time 
     start_time = time.time()
 
+    # Records time stamp for start time 
+    start_timestamp = time.strftime("%Y-%m-%d %H:%M:%S",time.localtime())
+    print(f"{player_name}'s turn started at: {start_timestamp}")
+
 
     dice = roll_dice()
     roll_history = [tuple(dice)]
@@ -95,6 +99,10 @@ def play_turn(player_name, max_re_rolls, computer=False):
     # Check if the player tupled out
     if tuple_out(dice):
         print(f"Tuple out! {player_name} scores 0 points this turn.")
+        end_time = time.time()
+        print(f"Turn Duration: {end_time-start_time:.2f} seconds")
+        end_timestamp = time.strftime("%Y-%m-%d %H:%M:%S",time.localtime())
+        print(f"{player_name}'s turn ended at: {end_timestamp}")
         return 0
 
     # Check if the player rolled a fixed dice 
@@ -104,6 +112,10 @@ def play_turn(player_name, max_re_rolls, computer=False):
         score = sum(dice)
         print(f"{player_name} scores {score} points this turn.")
         print(f"Roll history for this turn: {roll_history}")
+        end_time = time.time()
+        print(f"Turn Duration: {end_time-start_time:.2f} seconds")
+        end_timestamp = time.strftime("%Y-%m-%d %H:%M:%S",time.localtime())
+        print(f"{player_name}'s turn ended at: {end_timestamp}")
         return score
 
     re_roll_count = 0  # Initialize re-roll count
@@ -123,6 +135,8 @@ def play_turn(player_name, max_re_rolls, computer=False):
             # Ends the time 
             end_time = time.time()
             print(f"Turn Duration: {end_time-start_time:.2f} seconds")
+            end_timestamp = time.strftime("%Y-%m-%d %H:%M:%S",time.localtime())
+            print(f"{player_name}'s turn ended at: {end_timestamp}")
             return score
 
         # If the player decides to re-roll
@@ -138,6 +152,8 @@ def play_turn(player_name, max_re_rolls, computer=False):
             # Ends the time 
             end_time = time.time()
             print(f"Turn Duration: {end_time-start_time:.2f} seconds")
+            end_timestamp = time.strftime("%Y-%m-%d %H:%M:%S",time.localtime())
+            print(f"{player_name}'s turn ended at: {end_timestamp}")
             return 0
 
         # Recalculate fixed dice after each re-roll
@@ -150,6 +166,8 @@ def play_turn(player_name, max_re_rolls, computer=False):
             # Ends the time 
             end_time = time.time()
             print(f"Turn Duration: {end_time-start_time:.2f} seconds")
+            end_timestamp = time.strftime(time.localtime())
+            print(f"{player_name}'s turn ended at: {end_timestamp}")
             return score
 
 def visualize_stats(player_stats_df,player_stats):
