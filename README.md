@@ -16,10 +16,10 @@ They can choose any number they want or skip it and let it default to 50. After 
 They can choose any number they want or skip it and let it default to 5. The game will then ask how many players are playing. 
 The game will suggest 1-4, but the player can skip the question and it will default to 2 players. 
 If the player puts in a wrong value (something that is not a number), an error message will pop up and the game will use the default values. 
-The game will then output three numbers for player 1 and that user has the yes or no ("y" or "n") option whether to keep the numbers or re-roll for a better chance. 
+The game will then output three numbers during each players turn and each player has a  yes or no ("y" or "n") option whether to keep the numbers or re-roll for a better chance. 
 If the player makes a typo when being asked if they want to continue or not, they will be prompted to answer the question again, allowing them to correct their mistake. 
-Then once they are satisfied with their three dice outputs they can answer no to the re-roll question and it moves on to player 2 and they repeat the same steps as player 1 did. 
-Both players can re-roll as many times as they want till they "tuple out", roll a "fixed" dice, or are happy with the sum of their dice points. 
+Then once they are satisfied with their three dice outputs they can answer no to the re-roll question and it moves on to the next player (or the same player depending on how many players there are) and they repeat the same steps.  
+All players can re-roll as many times as they want till they "tuple out", roll a "fixed" dice, or are happy with the sum of their dice points. 
 Once a player decides to finish their turn, their score, roll history, turn duration, and a table summarizing all the player's points and turns they have taken so far will pop up. 
-Then both players continue playing the game till one of the players reaches the target points. The player that reaches the target points first wins and the highest score reached during the game is tracked and reported after each game. 
+Then all players continue playing the game till one of the players reaches the target points. The player that reaches the target points first wins and the highest score reached during the game is tracked and reported after each game. 
 The game's results are then saved to a txt file called game_results.txt, and two bar graphs will appear showing the number of turns each player took and the scores they ended with. 
