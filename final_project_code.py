@@ -4,6 +4,10 @@ import random
 import sys 
 # imports the pandas module
 import pandas as pd
+# imports seaborn module 
+import seaborn as sns
+# imports matplotlib module
+import matplotlib.pyplot as plt
 
 def get_game_parameters():
     """
@@ -173,6 +177,34 @@ while max(player_stats[name]["score"] for name in player_names) < target:
     # Increment turns and switch to the next player
     turn_counter += 1 
 
+def visualize_stats(player_stats_df):
+    """ Visualizes the player statistics in bar plot form using seaborn and matplotlib module"""
+
+    # Making player_stats into a list of dictionaries to make it easier to plot 
+    data = []
+    for player, stats in player_stats.items():
+        data.append({
+            'Player': player,
+            'Score': stats['score'],
+            'Turns': stats['turns']
+        })
+
+    # Converting the list of dictionaries to a data frame 
+    player_stats_df = pd.DataFrame(data)
+    # plotting the scores of each player 
+    sns.barplot(x = player_stats_df.index, y = 'Score', data = player_stats_df)
+    plt.title('Player Scores')
+    plt.xlabel('Player')
+    plt.ylabel('Score')
+    plt.show()
+
+    # plotting the number of turns taken by each player 
+    sns.barplot(x = player_stats_df.index, y = 'Turns', data = player_stats_df)
+    plt.title('Player Turns')
+    plt.xlabel('Player')
+    plt.ylabel('Number of turns')
+    plt.show()
+
 # Determine the winner 
 max_score = -1
 winner = None
@@ -192,6 +224,8 @@ if max_score > high_score:
     print(f"New high score is: {high_score}")
 else: 
     print(f"Highscore to beat: {high_score}")
+
+visualize_stats(player_stats_df)
 
 # Write the results of the game to a file
 with open("game_results.txt", "w") as file:
